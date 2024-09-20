@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이미지</title>
+</head>
+<body>
+<h4>이미지 뷰</h4>
+<select id="list-area">
+
+</select>
+<img id="image-area">
+<script>
+	const select = document.getElementById("list-area");
+	const image = document.getElementById("image-area");
+	fetch("../image/formUI.hw")
+		.then(resp => resp.text())
+		.then(html => {
+			select.innerHTML = html
+			select.dispatchEvent(new Event("change"));
+		});
+	select.addEventListener("change", e=>{
+		let fileName = e.target.value;
+		image.src = `../image/stream.hw?imaGe=${fileName}`;
+		image.alt = fileName;
+	});
+</script>
+</body>
+</html>
